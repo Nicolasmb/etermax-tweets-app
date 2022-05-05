@@ -1,0 +1,55 @@
+<div class="container w-50 pb-5">
+  <div class="row">
+    <div class="col px-5" style="background-color: #44d689;">
+      <div class="text-center">
+        <img src="https://etermax.com/img/etermax_digital_negro.svg" height="300px">
+      </div>
+      <p class="display-6 text-center">
+        Ingrese un <span class="fw-bold">Hashtag</span> para buscar <span class="fw-bold">Tweets</span>:
+      </p>
+      <div class="m-lg-auto py-5">
+        <div class="row g-3">
+          <div class="col">
+            <form (ngSubmit)="searchTweets()" [formGroup]="form">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-white" id="basic-addon3">#</span>
+                </div>  
+                <input class="form-control" type="text" formControlName="hashtag">
+              </div>
+            </form>
+          </div>
+          <div class="col-auto">
+            <button class="btn btn-dark" type="submit" [disabled]="">Buscar Tweets</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- TWEETS -->
+      <div *ngFor="let tweet of tweets; let i=index" class="card text-white bg-dark mb-3">
+        <div class="card-header">Tweet {{ i + 1 }}</div>
+        <div class="card-body">
+          <!-- <h5 class="card-title">Dark card title</h5> -->
+          <p class="card-text">{{ tweet.text }}</p>
+        </div>
+      </div>
+      
+      <!-- MENSAJE DE LOADING -->
+      <div *ngIf="cargando" class="card text-white bg-dark mb-5">
+        <!-- <div class="card-header">Header</div> -->
+        <div class="card-body">
+          <h5 class="card-title text-center">Buscando tweets...</h5>
+        </div>
+      </div>
+
+      <!-- MENSAJE DE ERROR -->
+      <div *ngIf="!cargando && errorMessage != ''" class="card bg-warning mb-5">
+        <!-- <div class="card-header">Header</div> -->
+        <div class="card-body">
+          <h5 class="card-text text-center">Ha ocurrido un error</h5>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
